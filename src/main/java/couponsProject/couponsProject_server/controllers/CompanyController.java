@@ -38,7 +38,7 @@ public class CompanyController {
         companyService.addCoupon(coupon);
     }
 
-    @GetMapping("/coupon/delete/{id}")
+    @DeleteMapping("/coupon/{id}/delete")
     public void deleteCoupon(@PathVariable int id) {
         companyService.deleteCoupon(id);
     }

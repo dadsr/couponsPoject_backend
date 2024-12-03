@@ -24,9 +24,9 @@ public class CustomerController {
         return customerServices.getCustomer(id);
     }
 
-    @GetMapping("/customer/coupons/{id}")
-    public List<Coupon> getCoupons(@PathVariable int id) {
-        return customerServices.getCoupons(id);
+    @GetMapping("/customer/{customerId}/coupons/")
+    public List<Coupon> getCoupons(@PathVariable int customerId) {
+        return customerServices.getCoupons(customerId);
     }
 
     @PostMapping("/customer/{customerId}/coupon/{couponId}")

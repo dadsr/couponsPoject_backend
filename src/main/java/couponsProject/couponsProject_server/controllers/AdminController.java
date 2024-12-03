@@ -41,17 +41,15 @@ public class AdminController {
         return adminServices.getOneCustomer(id);
     }
 
-    @GetMapping("/company/delete/{id}")
-    public void delete(@PathVariable int id) {
+    @DeleteMapping("/company/{id}/delete")
+    public void deleteCompany(@PathVariable int id) {
         adminServices.deleteCompany(id);
     }
 
-
-    @GetMapping("/customer/delete/{id}")
+    @DeleteMapping("/customer/{id}/delete")
     public void deleteCustomer(@PathVariable int id) {
         adminServices.deleteCustomer(id);
     }
-
 
     @PutMapping("/company/update")
     public void updateCompany(@RequestBody Company company) {
