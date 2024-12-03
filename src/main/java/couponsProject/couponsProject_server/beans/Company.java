@@ -1,6 +1,7 @@
 package couponsProject.couponsProject_server.beans;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,7 @@ public class  Company {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JsonManagedReference
     private List<Coupon> coupons ;
 
     public Company(String name, String email, String password, List<Coupon> coupons) {

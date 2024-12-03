@@ -1,5 +1,6 @@
 package couponsProject.couponsProject_server.beans;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +49,7 @@ public class Coupon {
     private int id;
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonBackReference
     private Company company;
     @Enumerated
     @JdbcTypeCode(SqlTypes.INTEGER)
@@ -60,6 +62,7 @@ public class Coupon {
     private double price;
     private String image;
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "coupons")
+    @JsonBackReference
     private List<Customer> customers;
 
 

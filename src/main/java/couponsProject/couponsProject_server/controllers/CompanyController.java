@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @CrossOrigin
+@RequestMapping("com")
 public class CompanyController {
     private CompanyServices companyService;
 

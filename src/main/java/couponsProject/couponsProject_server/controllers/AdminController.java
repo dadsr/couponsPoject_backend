@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @CrossOrigin
+@RequestMapping("ad")
 public class AdminController {
     private AdminServices adminServices;
 

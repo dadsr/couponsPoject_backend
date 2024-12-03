@@ -1,5 +1,6 @@
 package couponsProject.couponsProject_server.beans;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +52,7 @@ public class Customer {
     @JoinTable(name = "customers_vs_coupons",
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "coupons_id"))
+    @JsonManagedReference
     private List<Coupon> coupons ;
 
     public Customer(String firstName, String lastName, String email, String password, List<Coupon> coupons) {
