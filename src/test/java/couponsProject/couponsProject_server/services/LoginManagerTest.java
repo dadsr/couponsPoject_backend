@@ -3,7 +3,7 @@ package couponsProject.couponsProject_server.services;
 import couponsProject.couponsProject_server.TestsUtils;
 import couponsProject.couponsProject_server.beans.Company;
 import couponsProject.couponsProject_server.beans.Customer;
-import couponsProject.couponsProject_server.exseptions.LoginManagerException;
+import couponsProject.couponsProject_server.exseptions.AuthenticationException;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ class LoginManagerTest {
             Assertions.assertThat(result)
                     .as("Login result should be an instance of AdminServices")
                     .isInstanceOf(AdminServices.class);
-        } catch (LoginManagerException e) {
+        } catch (AuthenticationException e) {
             throw new RuntimeException(e);
         }
 
@@ -46,27 +46,27 @@ class LoginManagerTest {
         Assertions.assertThatThrownBy(
                         ()-> loginManager.login("wrongemail@admin.com", "admin",ClientTypeEnum.ADMINISTRATOR))
                 .as("test login wrong mail Failure")
-                .isInstanceOf(LoginManagerException.class)
+                .isInstanceOf(AuthenticationException.class)
                 .hasMessageContaining("Your account name or password is incorrect.");
 
         log.info("Testing login - *********************** ADMINISTRATOR wrong password *********************** ");
         Assertions.assertThatThrownBy(
                         ()-> loginManager.login("admin@admin.com", "wrongPass",ClientTypeEnum.ADMINISTRATOR))
                 .as("test login wrong password Failure")
-                .isInstanceOf(LoginManagerException.class)
+                .isInstanceOf(AuthenticationException.class)
                 .hasMessageContaining("Your account name or password is incorrect.");
 
         log.info("Testing login - *********************** ADMINISTRATOR wrong ClientType *********************** ");
         Assertions.assertThatThrownBy(
                         ()-> loginManager.login("wrongemail@admin.com", "admin",ClientTypeEnum.COMPANY))
                 .as("test login wrong ClientType Failure")
-                .isInstanceOf(LoginManagerException.class)
+                .isInstanceOf(AuthenticationException.class)
                 .hasMessageContaining("Your account name or password is incorrect.");
 
         Assertions.assertThatThrownBy(
                         ()-> loginManager.login("wrongemail@admin.com", "admin",ClientTypeEnum.CUSTOMER))
                 .as("test login wrong ClientType Failure")
-                .isInstanceOf(LoginManagerException.class)
+                .isInstanceOf(AuthenticationException.class)
                 .hasMessageContaining("Your account name or password is incorrect.");
 
         //COMPANY
@@ -77,21 +77,21 @@ class LoginManagerTest {
         Assertions.assertThatThrownBy(
                         ()-> loginManager.login("wrongemail@admin.com",  company.getPassword(),ClientTypeEnum.COMPANY))
                 .as("test login wrong mail Failure")
-                .isInstanceOf(LoginManagerException.class)
+                .isInstanceOf(AuthenticationException.class)
                 .hasMessageContaining("Your account name or password is incorrect.");
 
         log.info("Testing login - *********************** COMPANY wrong password *********************** ");
         Assertions.assertThatThrownBy(
                         ()-> loginManager.login( company.getEmail(), "wrongpassword",ClientTypeEnum.COMPANY))
                 .as("test login wrong password Failure")
-                .isInstanceOf(LoginManagerException.class)
+                .isInstanceOf(AuthenticationException.class)
                 .hasMessageContaining("Your account name or password is incorrect.");
 
         log.info("Testing login - *********************** COMPANY wrong ClientType *********************** ");
         Assertions.assertThatThrownBy(
                         ()-> loginManager.login( company.getEmail(), company.getPassword(),ClientTypeEnum.CUSTOMER))
                 .as("test login wrong ClientType Failure")
-                .isInstanceOf(LoginManagerException.class)
+                .isInstanceOf(AuthenticationException.class)
                 .hasMessageContaining("Your account name or password is incorrect.");
 
         //CUSTOMER
@@ -108,7 +108,7 @@ class LoginManagerTest {
             Assertions.assertThat(result)
                     .as("Login result should be an instance of CustomerServices")
                     .isInstanceOf(CustomerServices.class);
-        } catch (LoginManagerException e) {
+        } catch (AuthenticationException e) {
             throw new RuntimeException(e);
         }
 
@@ -116,21 +116,21 @@ class LoginManagerTest {
         Assertions.assertThatThrownBy(
                         ()-> loginManager.login("wrongemail@admin.com", customer.getPassword(),ClientTypeEnum.CUSTOMER))
                 .as("test login wrong mail Failure")
-                .isInstanceOf(LoginManagerException.class)
+                .isInstanceOf(AuthenticationException.class)
                 .hasMessageContaining("Your account name or password is incorrect.");
 
         log.info("Testing login - *********************** CUSTOMER wrong password *********************** ");
         Assertions.assertThatThrownBy(
                         ()-> loginManager.login(customer.getEmail(), "wrongpassword",ClientTypeEnum.CUSTOMER))
                 .as("test login wrong password Failure")
-                .isInstanceOf(LoginManagerException.class)
+                .isInstanceOf(AuthenticationException.class)
                 .hasMessageContaining("Your account name or password is incorrect.");
 
         log.info("Testing login - *********************** CUSTOMER wrong ClientType *********************** ");
         Assertions.assertThatThrownBy(
                         ()-> loginManager.login(customer.getEmail(), customer.getPassword(),ClientTypeEnum.COMPANY))
                 .as("test login wrong ClientType Failure")
-                .isInstanceOf(LoginManagerException.class)
+                .isInstanceOf(AuthenticationException.class)
                 .hasMessageContaining("Your account name or password is incorrect.");
     }
 }

@@ -1,6 +1,6 @@
 package couponsProject.couponsProject_server.services;
 
-import couponsProject.couponsProject_server.exseptions.LoginManagerException;
+import couponsProject.couponsProject_server.exseptions.AuthenticationException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
@@ -24,9 +24,9 @@ public class LoginManager {
      * @param password   The password of the client
      * @param clientType The type of client (ADMINISTRATOR, COMPANY, or CUSTOMER)
      * @return A ClientServices object corresponding to the authenticated client type
-     * @throws LoginManagerException If authentication fails or an unexpected error occurs
+     * @throws AuthenticationException If authentication fails or an unexpected error occurs
      */
-    public  ClientServices  login(String email, String password, ClientTypeEnum clientType) throws LoginManagerException {
+    public  ClientServices  login(String email, String password, ClientTypeEnum clientType) throws AuthenticationException {
         log.info("Entering login for: {} using Email: {} Password: {}",clientType,email, password);
         try {
             switch (clientType) {
@@ -54,8 +54,8 @@ public class LoginManager {
                 }
                 break;
             }
-        }catch (Exception e){}//LoginManagerException is next
+        }catch (Exception e){}//AuthenticationException is next
         log.error("login failed for: {} using Email: {} Password: {}", clientType, email, password);
-        throw new LoginManagerException("Your account name or password is incorrect.");
+        throw new AuthenticationException("Your account name or password is incorrect.");
     }
 }

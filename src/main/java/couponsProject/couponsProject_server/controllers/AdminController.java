@@ -12,14 +12,11 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@CrossOrigin
 @RequestMapping("ad")
 public class AdminController {
     private AdminServices adminServices;
 
     // int login(String email, String password);
-
-
 
     @GetMapping("/companies")
     public List<Company> getCompanies() {
