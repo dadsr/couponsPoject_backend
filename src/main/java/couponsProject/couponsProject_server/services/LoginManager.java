@@ -3,17 +3,21 @@ package couponsProject.couponsProject_server.services;
 import couponsProject.couponsProject_server.exseptions.AuthenticationException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 
 @AllArgsConstructor
 @Slf4j
-@Component
+@Service
 @Scope("singleton")
 public class LoginManager {
     private  AdminServices adminServices;
+
     private  CompanyServices companyServices;
+
     private  CustomerServices customerServices;
 
 

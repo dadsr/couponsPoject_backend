@@ -6,13 +6,14 @@ import couponsProject.couponsProject_server.exseptions.AuthenticationException;
 import couponsProject.couponsProject_server.security.JwtTokenUtil;
 import couponsProject.couponsProject_server.services.*;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @AllArgsConstructor
+@Slf4j
 @RestController
 public class LoginController {
     private LoginManager loginManager;
@@ -20,10 +21,15 @@ public class LoginController {
     private JwtTokenUtil jwtTokenUtil;
 
 
-    @PutMapping("/login?email=${email}&password=${password}&role=${role}")
-    public String Login(@PathVariable String email, @PathVariable String password,@PathVariable String role) {
-
+    @PostMapping("/login")
+    public String Login(@RequestBody Map<String, String> loginDetails) {
+        String email = loginDetails.get("email");
+        String password = loginDetails.get("password");
+        String role = loginDetails.get("role");
         String token =null;
+
+        log.info("entering Login email:{} and password:{} and role:{}",email, password,role);
+
 
         switch (role){
             case "ADMINISTRATOR": {
@@ -50,8 +56,8 @@ public class LoginController {
         return token;
     }
 
-    @PutMapping("/logout?token=${token}")
-    public void Logout(@PathVariable String token) {
+    @DeleteMapping("/logout")
+    public void Logout(@RequestParam String token) {
         jwtTokenUtil.removeToken(token);
     }
 
