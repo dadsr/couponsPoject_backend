@@ -1,0 +1,38 @@
+11-12-2024 00:00:00 - c.c.s.CouponExpirationDailyJob - Daily job started at 2024-12-11T00:00:00.012518800 on thread scheduling-1
+11-12-2024 00:00:00 - c.c.services.AdminServicesImpl - entering findByEndDateBefore: 2024-12-11
+11-12-2024 00:00:00 - c.c.services.CompanyServicesImpl - Entering deleteCoupon coupon id: 11
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering detachCompany using company id: 11
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title763460866219 and this coupon title: title617503452229 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title598085879415 and this coupon title: title617503452229 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title935844091318 and this coupon title: title617503452229 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title577937530841 and this coupon title: title617503452229 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title617503452229 and this coupon title: title617503452229 
+11-12-2024 00:00:00 - c.c.services.CompanyServicesImpl - Entering deleteCoupon coupon id: 76
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering detachCompany using company id: 76
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title307806085942 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title97220926521 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title265811098957 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title724241579978 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title327826061308 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title296830039979 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title395167203506 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title860475084848 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title5331422781 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title736148859846 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title396451616567 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title361763413848 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title279847030384 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title601257114674 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title582932639754 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.couponsProject_server.beans.Coupon - Entering equals using coupon title: title39147218033 and this coupon title: title39147218033 
+11-12-2024 00:00:00 - c.c.s.CouponExpirationDailyJob - Daily job Ended at 2024-12-11T00:00:00.423628 on thread scheduling-1
+11-12-2024 00:15:31 - o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+11-12-2024 00:15:31 - o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+11-12-2024 00:15:31 - o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+11-12-2024 00:15:31 - c.c.controllers.LoginController - entering Login email:admin@admin.com and password:admin and role:ADMINISTRATOR
+11-12-2024 00:15:31 - c.c.services.LoginManager - Entering login for: ADMINISTRATOR using Email: admin@admin.com Password: admin
+11-12-2024 00:15:31 - c.c.services.AdminServicesImpl - Entering login using Email: admin@admin.com Password: admin
+11-12-2024 00:15:31 - c.c.services.AdminServicesImpl - entering getAllCompanies
+11-12-2024 00:15:32 - c.c.services.AdminServicesImpl - entering getAllCompanies
+11-12-2024 00:15:32 - c.c.services.AdminServicesImpl - entering getAllCustomers
+11-12-2024 00:15:32 - c.c.services.AdminServicesImpl - entering getAllCustomers
