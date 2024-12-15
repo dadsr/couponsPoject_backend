@@ -48,4 +48,6 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
 
     //@Query("select c from Coupon c where c.endDate < ?1")
     List<Coupon> findByEndDateBefore(Date date);
+
+
 }

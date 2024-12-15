@@ -28,10 +28,17 @@ public class CustomerController {
         return customerServices.getCoupons(customerId);
     }
 
+    @GetMapping("/customer/{customerId}/purchase_coupons/")
+    public List<Coupon> purchaseCoupons(@PathVariable int customerId) {
+        return customerServices.getPurchaseCoupons(customerId);
+    }
+
+
     @PostMapping("/customer/{customerId}/coupon/{couponId}")
     public void couponPurchase(@PathVariable int customerId, @PathVariable int couponId) {
         customerServices.couponPurchase(customerId, couponId);
     }
+
 
     //List<Coupon> getCoupons(int customerId, CategoryEnum category);
 

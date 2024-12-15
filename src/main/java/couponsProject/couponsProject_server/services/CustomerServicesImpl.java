@@ -146,5 +146,28 @@ public class CustomerServicesImpl implements CustomerServices {
         }
     }
 
+    /**
+     * Retrieves a list of available coupons for purchase by a specific customer.
+     * This method filters out coupons that are either already purchased by the customer
+     * or have an amount of zero, indicating they are not available for purchase.
+     *
+     * @param customerId the unique identifier of the customer for whom the coupons are being retrieved
+     * @return a list of {@code Coupon} objects that are available for purchase by the customer.
+     *         If the customer does not exist, returns an empty list.
+     */
+    @Override
+    public List<Coupon> getPurchaseCoupons(int customerId) {
+        log.info("Entering getPurchaseCoupons using customerId: {} ", customerId);
+        Customer customer = customerRepository.getCustomerById(customerId);
+        if (customer != null) {
+           return couponRepository.findAll().stream()
+                    .filter(coupon -> coupon.getAmount() > 0)
+                    .filter(coupon -> !customer.getCoupons().contains(coupon))
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
 }
 

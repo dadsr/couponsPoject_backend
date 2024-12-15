@@ -20,4 +20,6 @@ public interface CustomerServices  extends ClientServices {
     List<Coupon> getCoupons(int customerId, CategoryEnum category);
 
     List<Coupon> getCoupons(int customerId, double maxPrice);
+
+    List<Coupon> getPurchaseCoupons(int customerId);
 }
