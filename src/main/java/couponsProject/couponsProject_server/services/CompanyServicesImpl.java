@@ -48,7 +48,7 @@ public class CompanyServicesImpl implements CompanyServices {
      * @Override Overrides the getCompanyDetails method from a parent class or interface
      */
     @Override
-    public Company getCompanyDetails(int companyId){
+    public Company getCompanyDetails(int companyId) {
         log.info("Entering getCompanyDetails using company id : {}",companyId);
         if(companyRepository.existsById(companyId)) {
             return companyRepository.findCompaniesById(companyId);
@@ -89,7 +89,7 @@ public class CompanyServicesImpl implements CompanyServices {
      * @Override Overrides the updateCoupon method from a parent class or interface
      */
     @Override
-    public void updateCoupon(Coupon coupon){
+    public void updateCoupon(Coupon coupon)  {
         log.info("Entering updateCoupon, coupon id: {}", coupon.getId());
         if (couponRepository.existsById(coupon.getId())){
             couponRepository.save(coupon);
@@ -110,7 +110,7 @@ public class CompanyServicesImpl implements CompanyServices {
      */
     @Transactional
     @Override
-    public void deleteCoupon(int couponID){
+    public void deleteCoupon(int couponID)  {
         log.info("Entering deleteCoupon coupon id: {}", couponID);
         Coupon coupon = couponRepository.findById(couponID).orElseThrow(()->{
             log.error("No such coupon to update, coupon id: {}", couponID);

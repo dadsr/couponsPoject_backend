@@ -2,6 +2,7 @@ package couponsProject.couponsProject_server.services;
 
 import couponsProject.couponsProject_server.beans.Company;
 import couponsProject.couponsProject_server.beans.Coupon;
+import couponsProject.couponsProject_server.exseptions.CouponException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

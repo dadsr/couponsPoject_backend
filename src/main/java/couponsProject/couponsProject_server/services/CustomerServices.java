@@ -3,6 +3,7 @@ package couponsProject.couponsProject_server.services;
 import couponsProject.couponsProject_server.beans.CategoryEnum;
 import couponsProject.couponsProject_server.beans.Coupon;
 import couponsProject.couponsProject_server.beans.Customer;
+import couponsProject.couponsProject_server.exseptions.CouponException;
 import jakarta.transaction.Transactional;
 
 import java.util.List;

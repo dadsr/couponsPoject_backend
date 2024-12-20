@@ -8,6 +8,7 @@ import couponsProject.couponsProject_server.services.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -22,13 +23,14 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public String Login(@RequestBody Map<String, String> loginDetails) {
+    public ResponseEntity<String> Login(@RequestBody Map<String, String> loginDetails) {
+
         String email = loginDetails.get("email");
         String password = loginDetails.get("password");
         String role = loginDetails.get("role");
         String token =null;
 
-        log.info("entering Login email:{} and password:{} and role:{}",email, password,role);
+        log.info("Attempting to log in using email:{} and password:{} and role:{}",email, password,role);
 
 
         switch (role){
@@ -49,16 +51,22 @@ public class LoginController {
                 token = jwtTokenUtil.createToken(customer.getId(), customer.getFirstName() + " " + customer.getLastName(),email,role);
             }
             break;
+            default:
+                token = null;
         }
         //exist token
-        if(token == null || !jwtTokenUtil.addToken(token))
+        if(token == null)
+            throw new AuthenticationException("Invalid role specified");
+        else if (!jwtTokenUtil.addToken(token)) {
             throw new AuthenticationException("user already logged in");
-        return token;
-    }
+        }
+        return ResponseEntity.ok(token);    }
 
     @DeleteMapping("/logout")
-    public void Logout(@RequestParam String token) {
+    public ResponseEntity<String> Logout(@RequestParam String token) {
         jwtTokenUtil.removeToken(token);
+        return ResponseEntity.ok("Logout succseded");
+
     }
 
 }

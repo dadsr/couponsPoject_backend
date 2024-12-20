@@ -3,6 +3,7 @@ package couponsProject.couponsProject_server.services;
 import couponsProject.couponsProject_server.beans.Company;
 import couponsProject.couponsProject_server.beans.Coupon;
 import couponsProject.couponsProject_server.beans.Customer;
+import couponsProject.couponsProject_server.exseptions.CompanyException;
 
 import java.util.ArrayList;
 import java.util.List;

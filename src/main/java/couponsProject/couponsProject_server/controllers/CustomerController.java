@@ -4,6 +4,7 @@ import couponsProject.couponsProject_server.beans.Coupon;
 import couponsProject.couponsProject_server.beans.Customer;
 import couponsProject.couponsProject_server.services.CustomerServices;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,24 +20,25 @@ public class CustomerController {
 
 
     @GetMapping("/customer/{id}")
-    public Customer getCustomer(@PathVariable int id) {
-        return customerServices.getCustomer(id);
+    public ResponseEntity <Customer> getCustomer(@PathVariable int id) {
+        return ResponseEntity.ok(customerServices.getCustomer(id));
     }
 
     @GetMapping("/customer/{customerId}/coupons/")
-    public List<Coupon> getCoupons(@PathVariable int customerId) {
-        return customerServices.getCoupons(customerId);
+    public ResponseEntity <List<Coupon>> getCoupons(@PathVariable int customerId) {
+        return ResponseEntity.ok(customerServices.getCoupons(customerId));
     }
 
     @GetMapping("/customer/{customerId}/purchase_coupons/")
-    public List<Coupon> purchaseCoupons(@PathVariable int customerId) {
-        return customerServices.getPurchaseCoupons(customerId);
+    public ResponseEntity <List<Coupon>> purchaseCoupons(@PathVariable int customerId) {
+        return ResponseEntity.ok(customerServices.getPurchaseCoupons(customerId));
     }
 
 
     @PostMapping("/customer/{customerId}/coupon/{couponId}")
-    public void couponPurchase(@PathVariable int customerId, @PathVariable int couponId) {
+    public ResponseEntity <String> couponPurchase(@PathVariable int customerId, @PathVariable int couponId) {
         customerServices.couponPurchase(customerId, couponId);
+        return ResponseEntity.ok("purchase accepted");
     }
 
 
