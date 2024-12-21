@@ -12,30 +12,30 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("cus")
+@RequestMapping("customer")
 public class CustomerController {
     private CustomerServices customerServices;
 
     //int login(String email, String password);
 
 
-    @GetMapping("/customer/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity <Customer> getCustomer(@PathVariable int id) {
         return ResponseEntity.ok(customerServices.getCustomer(id));
     }
 
-    @GetMapping("/customer/{customerId}/coupons/")
+    @GetMapping("/{customerId}/coupons/")
     public ResponseEntity <List<Coupon>> getCoupons(@PathVariable int customerId) {
         return ResponseEntity.ok(customerServices.getCoupons(customerId));
     }
 
-    @GetMapping("/customer/{customerId}/purchase_coupons/")
+    @GetMapping("/{customerId}/purchase_coupons/")
     public ResponseEntity <List<Coupon>> purchaseCoupons(@PathVariable int customerId) {
         return ResponseEntity.ok(customerServices.getPurchaseCoupons(customerId));
     }
 
 
-    @PostMapping("/customer/{customerId}/coupon/{couponId}")
+    @PostMapping("/{customerId}/coupon/{couponId}")
     public ResponseEntity <String> couponPurchase(@PathVariable int customerId, @PathVariable int couponId) {
         customerServices.couponPurchase(customerId, couponId);
         return ResponseEntity.ok("purchase accepted");

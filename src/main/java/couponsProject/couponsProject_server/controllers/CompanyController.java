@@ -11,14 +11,14 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("com")
+@RequestMapping("company")
 public class CompanyController {
     private CompanyServices companyService;
 
   //  int login(String email, String password);
 
 
-    @GetMapping("/company/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Company> getCompany(@PathVariable int id) {
         return ResponseEntity.ok(companyService.getCompanyDetails(id));
     }
@@ -28,7 +28,7 @@ public class CompanyController {
         return ResponseEntity.ok(companyService.getCompanyCoupons(companyId));
     }
 
-    @PutMapping("/coupon")
+    @PutMapping("/coupon/update")
     public ResponseEntity<String> updateCoupon(@RequestBody Coupon coupon) {
         companyService.updateCoupon(coupon);
         return ResponseEntity.ok("coupon updated");

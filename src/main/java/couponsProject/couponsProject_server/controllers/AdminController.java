@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("ad")
+@RequestMapping("admin")
 public class AdminController {
     private AdminServices adminServices;
 
