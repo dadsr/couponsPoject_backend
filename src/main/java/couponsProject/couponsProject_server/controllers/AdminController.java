@@ -51,7 +51,7 @@ public class AdminController {
         return ResponseEntity.ok("Customer deleted");
     }
 
-    @PutMapping("/company/update")
+    @PutMapping("/l/update")
     public ResponseEntity<String> updateCompany(@RequestBody Company company) {
         adminServices.updateCompany(company);
         return ResponseEntity.ok("Company updated");
