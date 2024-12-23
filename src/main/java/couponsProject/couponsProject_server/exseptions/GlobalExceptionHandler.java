@@ -1,5 +1,6 @@
 package couponsProject.couponsProject_server.exseptions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,6 +14,7 @@ import java.util.NoSuchElementException;
  *
  * @ControllerAdvice Indicates that this class provides @ExceptionHandler methods for multiple controllers
  */
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
     /**
@@ -22,6 +24,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handleNoSuchElement(NoSuchElementException e){
+        log.info("NoSuchElementException status: {}",HttpStatus.NOT_FOUND);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
@@ -32,6 +35,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(CompanyException.class)
     public ResponseEntity<String> companyException(CompanyException e){
+        log.info("companyException status: {}",HttpStatus.FORBIDDEN);
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
     /**
@@ -41,6 +45,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(CustomerException.class)
     public ResponseEntity<String> customerException(CustomerException e){
+        log.info("CustomerException status: {}",HttpStatus.FORBIDDEN);
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
 
@@ -52,6 +57,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CouponException.class)
     public ResponseEntity<String> couponException(CouponException e){
+        log.info("couponException status: {}",HttpStatus.FORBIDDEN);
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
 }

@@ -4,12 +4,13 @@ import couponsProject.couponsProject_server.beans.Coupon;
 import couponsProject.couponsProject_server.beans.Customer;
 import couponsProject.couponsProject_server.services.CustomerServices;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@Slf4j
 @AllArgsConstructor
 @RestController
 @RequestMapping("customer")

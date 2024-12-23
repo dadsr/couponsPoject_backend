@@ -24,12 +24,10 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<String> Login(@RequestBody Map<String, String> loginDetails) {
-
         String email = loginDetails.get("email");
         String password = loginDetails.get("password");
         String role = loginDetails.get("role");
         String token =null;
-
         log.info("Attempting to log in using email:{} and password:{} and role:{}",email, password,role);
 
 
@@ -64,9 +62,9 @@ public class LoginController {
 
     @DeleteMapping("/logout")
     public ResponseEntity<String> Logout(@RequestParam String token) {
+        log.info("Attempting to Logout using token:{}",token);
         jwtTokenUtil.removeToken(token);
         return ResponseEntity.ok("Logout succseded");
-
     }
 
 }

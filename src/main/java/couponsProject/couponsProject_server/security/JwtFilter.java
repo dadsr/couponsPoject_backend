@@ -11,6 +11,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-
+@Slf4j
 @Component
 @Order(2)
 public class JwtFilter extends OncePerRequestFilter {
@@ -28,6 +29,8 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
+        log.info("entering doFilterInternal request:{} and response:{} and filterChain:{}",request,response,filterChain );
 
         String authorizationHeader = request.getHeader("Authorization");
 
@@ -46,13 +49,21 @@ public class JwtFilter extends OncePerRequestFilter {
                 String email = decodedJWT.getClaim("email").asString();
                 ClientTypeEnum role = ClientTypeEnum.valueOf(decodedJWT.getClaim("role").asString());
 
+
+
             } catch (JWTVerificationException| AuthenticationException e) {
+
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);//401
                 response.getWriter().write("Invalid or expired token");
+                log.error("doFilterInternal - Invalid or expired token");
                 return;
             }
         }
+        //todo  role =
+        if(isAuthorized(request.getServletPath(),role)){
 
+        }
+        log.info("doFilterInternal sends request:{} and response:{}",request,response );
         filterChain.doFilter(request, response);
     }
 
@@ -68,6 +79,30 @@ public class JwtFilter extends OncePerRequestFilter {
                 .withIssuer("com.garbage.collectors") // Match issuer
                 .build();
         return verifier.verify(token); // Verify and decode the token
-    }}
+    }
+
+    private boolean isAuthorized(String path,ClientTypeEnum role) {
+        switch (role){
+            case ADMINISTRATOR:
+                if(path.startsWith("/admin"){
+                return true;
+                break;
+            }
+            case COMPANY:
+                if(path.startsWith("/company"){
+                return true;
+                break;
+            }
+            case CUSTOMER:
+                if(path.startsWith("/customer"){
+                return true;
+                break;
+            }
+            default:
+                return false;
+        }
+
+    }
+}
 
 
