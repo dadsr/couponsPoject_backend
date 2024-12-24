@@ -33,29 +33,29 @@ public class AdminController {
         return ResponseEntity.ok(adminServices.getAllCustomers());
     }
 
-    @GetMapping("/company/{id}")
-    public ResponseEntity<Company> getCompany(@PathVariable int id) {
-        log.info("entering @GetMapping getCompany company id:{}",id);
-        return ResponseEntity.ok(adminServices.getOneCompany(id));
+    @GetMapping("/company/{companyId}")
+    public ResponseEntity<Company> getCompany(@PathVariable int companyId) {
+        log.info("entering @GetMapping getCompany company id:{}",companyId);
+        return ResponseEntity.ok(adminServices.getOneCompany(companyId));
     }
 
-    @GetMapping("/customer/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable int id) {
-        log.info("entering @GetMapping getCustomer customer id:{}",id);
-        return ResponseEntity.ok(adminServices.getOneCustomer(id));
+    @GetMapping("/customer/{customerId}")
+    public ResponseEntity<Customer> getCustomer(@PathVariable int customerId) {
+        log.info("entering @GetMapping getCustomer customer id:{}",customerId);
+        return ResponseEntity.ok(adminServices.getOneCustomer(customerId));
     }
 
-    @DeleteMapping("/company/{id}/delete")
-    public ResponseEntity<String> deleteCompany(@PathVariable int id) {
-        log.info("entering @DeleteMapping deleteCompany company id:{}",id);
-        adminServices.deleteCompany(id);
+    @DeleteMapping("/company/{companyId}/delete")
+    public ResponseEntity<String> deleteCompany(@PathVariable int companyId) {
+        log.info("entering @DeleteMapping deleteCompany company id:{}",companyId);
+        adminServices.deleteCompany(companyId);
         return ResponseEntity.ok("Company deleted");
     }
 
-    @DeleteMapping("/customer/{id}/delete")
-    public ResponseEntity<String> deleteCustomer(@PathVariable int id) {
-        log.info("entering @DeleteMapping deleteCustomer customer id:{}",id);
-        adminServices.deleteCustomer(id);
+    @DeleteMapping("/customer/{customerId}/delete")
+    public ResponseEntity<String> deleteCustomer(@PathVariable int customerId) {
+        log.info("entering @DeleteMapping deleteCustomer customer id:{}",customerId);
+        adminServices.deleteCustomer(customerId);
         return ResponseEntity.ok("Customer deleted");
     }
 

@@ -27,8 +27,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private JwtTokenUtil jwtTokenUtil;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         log.info("entering doFilterInternal request:{} and response:{} and filterChain:{}",request,response,filterChain );
 
@@ -49,7 +48,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 String email = decodedJWT.getClaim("email").asString();
                 ClientTypeEnum role = ClientTypeEnum.valueOf(decodedJWT.getClaim("role").asString());
 
-
+                if(!isAuthorized(request.getServletPath(),role))
+                    throw new AuthenticationException("Invalid request path");
 
             } catch (JWTVerificationException| AuthenticationException e) {
 
@@ -59,10 +59,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 return;
             }
         }
-        //todo  role =
-        if(isAuthorized(request.getServletPath(),role)){
 
-        }
         log.info("doFilterInternal sends request:{} and response:{}",request,response );
         filterChain.doFilter(request, response);
     }
@@ -84,24 +81,14 @@ public class JwtFilter extends OncePerRequestFilter {
     private boolean isAuthorized(String path,ClientTypeEnum role) {
         switch (role){
             case ADMINISTRATOR:
-                if(path.startsWith("/admin"){
-                return true;
-                break;
-            }
+                return path.startsWith("/admin");
             case COMPANY:
-                if(path.startsWith("/company"){
-                return true;
-                break;
-            }
+                return path.startsWith("/company");
             case CUSTOMER:
-                if(path.startsWith("/customer"){
-                return true;
-                break;
-            }
+                return path.startsWith("/customer");
             default:
                 return false;
         }
-
     }
 }
 

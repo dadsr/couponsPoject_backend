@@ -20,10 +20,10 @@ public class CompanyController {
   //  int login(String email, String password);
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Company> getCompany(@PathVariable int id) {
-        log.info("entering @GetMapping getCompany customer id:{}",id);
-        return ResponseEntity.ok(companyService.getCompanyDetails(id));
+    @GetMapping("/{companyId}")
+    public ResponseEntity<Company> getCompany(@PathVariable int companyId) {
+        log.info("entering @GetMapping getCompany customer id:{}",companyId);
+        return ResponseEntity.ok(companyService.getCompanyDetails(companyId));
     }
 
     @GetMapping("/coupons/{companyId}")
@@ -48,10 +48,10 @@ public class CompanyController {
 
     }
 
-    @DeleteMapping("/coupon/{id}/delete")
-    public ResponseEntity<String> deleteCoupon(@PathVariable int id) {
-        log.info("entering @DeleteMapping deleteCoupon coupon id:{}",id);
-        companyService.deleteCoupon(id);
+    @DeleteMapping("/coupon/{couponId}/delete")
+    public ResponseEntity<String> deleteCoupon(@PathVariable int couponId) {
+        log.info("entering @DeleteMapping deleteCoupon coupon id:{}",couponId);
+        companyService.deleteCoupon(couponId);
         return ResponseEntity.ok("coupon deleted");
     }
 

@@ -20,9 +20,9 @@ public class CustomerController {
     //int login(String email, String password);
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity <Customer> getCustomer(@PathVariable int id) {
-        return ResponseEntity.ok(customerServices.getCustomer(id));
+    @GetMapping("/{customerId}")
+    public ResponseEntity <Customer> getCustomer(@PathVariable int customerId) {
+        return ResponseEntity.ok(customerServices.getCustomer(customerId));
     }
 
     @GetMapping("/{customerId}/coupons/")
@@ -34,7 +34,6 @@ public class CustomerController {
     public ResponseEntity <List<Coupon>> purchaseCoupons(@PathVariable int customerId) {
         return ResponseEntity.ok(customerServices.getPurchaseCoupons(customerId));
     }
-
 
     @PostMapping("/{customerId}/coupon/{couponId}")
     public ResponseEntity <String> couponPurchase(@PathVariable int customerId, @PathVariable int couponId) {
