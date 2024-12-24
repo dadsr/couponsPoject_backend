@@ -54,7 +54,7 @@ public class JwtTokenUtil {
 
     public boolean addToken(String token) {
         log.info("entering addToken token:{}", token);
-            return activeTokens.put(token,LocalDateTime.now())==null;
+            return (activeTokens.put(token,LocalDateTime.now())==null);
     }
 
     public void updateLastActivity(String token) {

@@ -5,6 +5,7 @@ import couponsProject.couponsProject_server.beans.Coupon;
 import couponsProject.couponsProject_server.services.CompanyServices;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class CompanyController {
         return ResponseEntity.ok(companyService.getCompanyCoupons(companyId));
     }
 
-    @PutMapping("/coupon/update")
+    @PutMapping(value = "/coupon/update", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateCoupon(@RequestBody Coupon coupon) {
         log.info("entering @PutMapping updateCoupon coupon id:{}",coupon.getId());
         companyService.updateCoupon(coupon);
