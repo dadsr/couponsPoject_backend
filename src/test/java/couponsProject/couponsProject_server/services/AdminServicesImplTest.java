@@ -82,7 +82,7 @@ class AdminServicesImplTest {
         Assertions.assertThatThrownBy(() -> adminServices.updateCompany(company2))
                 .as("updateCompany - Test if updating a non-existent company throws NoSuchElementException")
                 .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("Company does not exist");
+                .hasMessageContaining("CompanyDTO does not exist");
     }
     @Test
     void getOneCompany() {
@@ -138,7 +138,7 @@ class AdminServicesImplTest {
                         () -> adminServices.deleteCompany(company.getId()))
                 .as("test if company was deleted successful")
                 .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("Company does not exist");
+                .hasMessageContaining("CompanyDTO does not exist");
     }
     @Test
     void getAllCompanies() {

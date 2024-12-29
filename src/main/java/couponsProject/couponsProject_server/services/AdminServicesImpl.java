@@ -43,12 +43,12 @@ public class AdminServicesImpl implements AdminServices{
         return (Objects.equals(email, "admin@admin.com") && Objects.equals(password, "admin"))?1:0;
     }
 
-    /****************************** Company methods **********************************/
+    /****************************** CompanyDTO methods **********************************/
 
     /**
      * Adds a new company to the system.
      *
-     * @param company The Company object to be added
+     * @param company The CompanyDTO object to be added
      * @throws CompanyException if a company with the same name or email already exists
      * @Override Overrides the addCompany method from a parent class or interface
      */
@@ -58,7 +58,7 @@ public class AdminServicesImpl implements AdminServices{
         if(!companyRepository.existsByNameOrEmail(company.getName(),company.getEmail())) {
             companyRepository.save(company);
         }else {
-            log.error("Company already exist for name:{} or email:{}", company.getName(), company.getEmail());
+            log.error("CompanyDTO already exist for name:{} or email:{}", company.getName(), company.getEmail());
             throw new CompanyException("company already exists");
         }
     }
@@ -66,7 +66,7 @@ public class AdminServicesImpl implements AdminServices{
     /**
      * Updates an existing company in the system.
      *
-     * @param company The Company object with updated information
+     * @param company The CompanyDTO object with updated information
      * @throws NoSuchElementException if no company exists with the given ID
      * @Override Overrides the updateCompany method from a parent class or interface
      */
@@ -78,7 +78,7 @@ public class AdminServicesImpl implements AdminServices{
             log.debug("updateCompany succeeded, company id:{}",company.getId());
         }else{
             log.error("No such company to update, company id:{}",company.getId());
-            throw new NoSuchElementException("Company does not exist");
+            throw new NoSuchElementException("CompanyDTO does not exist");
         }
     }
 
@@ -100,7 +100,7 @@ public class AdminServicesImpl implements AdminServices{
         Company company = companyRepository.findById(companyID)
                 .orElseThrow(()-> {
                     log.error("deleteCompany throw NoSuchElementException company id:{}",companyID);
-                    return new NoSuchElementException("Company does not exist");
+                    return new NoSuchElementException("CompanyDTO does not exist");
                 });
         for (Coupon coupon : company.getCoupons()) {
             for (Customer customer : coupon.getCustomers()) {
@@ -118,7 +118,7 @@ public class AdminServicesImpl implements AdminServices{
      * Retrieves a single company by its ID.
      *
      * @param companyId The ID of the company to retrieve
-     * @return The Company object if found
+     * @return The CompanyDTO object if found
      * @throws NoSuchElementException if no company exists with the given ID
      * @Override Overrides the getOneCompany method from a parent class or interface
      */
@@ -136,7 +136,7 @@ public class AdminServicesImpl implements AdminServices{
     /**
      * Retrieves all companies from the system.
      *
-     * @return An ArrayList containing all Company objects
+     * @return An ArrayList containing all CompanyDTO objects
      * @Override Overrides the getAllCompanies method from a parent class or interface
      */
     @Override
@@ -145,12 +145,12 @@ public class AdminServicesImpl implements AdminServices{
         return companyRepository.getAllCompanies();
     }
 
-    /****************************** Customer methods **********************************/
+    /****************************** CustomerDTO methods **********************************/
 
     /**
      * Adds a new customer to the system.
      *
-     * @param customer The Customer object to be added
+     * @param customer The CustomerDTO object to be added
      * @throws CustomerException if a customer with the same email already exists
      * @Override Overrides the addCustomer method from a parent class or interface
      */
@@ -168,7 +168,7 @@ public class AdminServicesImpl implements AdminServices{
     /**
      * Updates an existing customer in the system.
      *
-     * @param customer The Customer object with updated information
+     * @param customer The CustomerDTO object with updated information
      * @throws NoSuchElementException if no customer exists with the given ID
      * @Override Overrides the updateCustomer method from a parent class or interface
      */
@@ -205,7 +205,7 @@ public class AdminServicesImpl implements AdminServices{
      * Retrieves a single customer from the system by their ID.
      *
      * @param customerID The ID of the customer to retrieve
-     * @return The Customer object if found
+     * @return The CustomerDTO object if found
      * @throws NoSuchElementException if no customer exists with the given ID
      * @Override Overrides the getOneCustomer method from a parent class or interface
      */
@@ -225,7 +225,7 @@ public class AdminServicesImpl implements AdminServices{
     /**
      * Retrieves all customers from the system.
      *
-     * @return An ArrayList containing all Customer objects
+     * @return An ArrayList containing all CustomerDTO objects
      * @Override Overrides the getAllCustomers method from a parent class or interface
      */
     @Override
@@ -238,7 +238,7 @@ public class AdminServicesImpl implements AdminServices{
      * Retrieves a list of coupons that expire before the specified date.
      *
      * @param date The date to compare against coupon end dates
-     * @return A list of Coupon objects with end dates before the given date
+     * @return A list of CouponDTO objects with end dates before the given date
      */
     @Override
     public List<Coupon> findByEndDateBefore(java.sql.Date date) {

@@ -42,7 +42,7 @@ public class CustomerController {
     }
 
 
-    //List<Coupon> getCoupons(int customerId, CategoryEnum category);
+    //List<CouponDTO> getCoupons(int customerId, CategoryEnum category);
 
-    //List<Coupon> getCoupons(int customerId, double maxPrice);
+    //List<CouponDTO> getCoupons(int customerId, double maxPrice);
 }

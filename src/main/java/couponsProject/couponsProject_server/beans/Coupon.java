@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a Coupon entity in the system.
+ * Represents a CouponDTO entity in the system.
  *
  * @NoArgsConstructor Generates a no-argument constructor
  * @Getter/@Setter Generate getter and setter methods for fields
@@ -22,18 +22,18 @@ import java.util.Objects;
  * <p>
  * Fields:
  * - id: Unique identifier (auto-generated, immutable)
- * - company: Associated Company (Many-to-One relationship)
- * - category: Coupon category (Enumerated type)
- * - title: Coupon title
- * - description: Coupon description
- * - startDate: Coupon validity start date
- * - endDate: Coupon expiration date
+ * - company: Associated CompanyDTO (Many-to-One relationship)
+ * - category: CouponDTO category (Enumerated type)
+ * - title: CouponDTO title
+ * - description: CouponDTO description
+ * - startDate: CouponDTO validity start date
+ * - endDate: CouponDTO expiration date
  * - amount: Available quantity of the coupon
  * - price: Price of the coupon
  * - image: Image URL or path for the coupon
  * - customers: List of customers who purchased this coupon (Many-to-Many relationship)
  *
- * Note: The customers relationship is eagerly fetched and mapped by the 'coupons' field in the Customer entity.
+ * Note: The customers relationship is eagerly fetched and mapped by the 'coupons' field in the CustomerDTO entity.
  */
 @Slf4j
 @NoArgsConstructor
@@ -104,17 +104,17 @@ public class Coupon {
     /**
      * @Builder Enables builder pattern for flexible object creation
      * <p>
-     * Factory method for creating Coupon instances.
-     * @param company Associated Company
-     * @param category Coupon category
-     * @param title Coupon title
-     * @param description Coupon description
+     * Factory method for creating CouponDTO instances.
+     * @param company Associated CompanyDTO
+     * @param category CouponDTO category
+     * @param title CouponDTO title
+     * @param description CouponDTO description
      * @param startDate Validity start date
      * @param endDate Expiration date
      * @param amount Available quantity
-     * @param price Coupon price
+     * @param price CouponDTO price
      * @param image Image URL or path
-     * @return A new Coupon instance with no associated customers
+     * @return A new CouponDTO instance with no associated customers
      */
     @Builder
     public static Coupon createInstance(Company company, CategoryEnum category, String title, String description, Date startDate, Date endDate, int amount, double price, String image){
@@ -168,7 +168,7 @@ public class Coupon {
     /**
      * Detaches this coupon from its associated company.
      * Removes this coupon from the company's list of coupons and sets the company reference to null.
-     * This method maintains the bidirectional relationship between Coupon and Company.
+     * This method maintains the bidirectional relationship between CouponDTO and CompanyDTO.
      */
     public void detachCompany() {
         log.info("Entering detachCompany using company id: {}", this.getId());

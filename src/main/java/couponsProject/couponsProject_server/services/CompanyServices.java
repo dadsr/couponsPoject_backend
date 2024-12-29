@@ -15,9 +15,12 @@ public interface CompanyServices extends ClientServices {
     void addCoupon(Coupon coupon);
 
     void updateCoupon(Coupon coupon);
+
     @Transactional
     void deleteCoupon(int couponID);
 
     List<Coupon> getCompanyCoupons(int companyId);
+
+    Coupon getCouponById(int couponID);
 
 }

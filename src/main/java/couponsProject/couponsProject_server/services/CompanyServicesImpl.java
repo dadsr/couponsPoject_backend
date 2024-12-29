@@ -43,7 +43,7 @@ public class CompanyServicesImpl implements CompanyServices {
      * Retrieves detailed information about a specific company.
      *
      * @param companyId The ID of the company to retrieve
-     * @return The Company object containing detailed information
+     * @return The CompanyDTO object containing detailed information
      * @throws NoSuchElementException if no company exists with the given ID
      * @Override Overrides the getCompanyDetails method from a parent class or interface
      */
@@ -61,7 +61,7 @@ public class CompanyServicesImpl implements CompanyServices {
     /**
      * Adds a new coupon to the system for a specific company.
      *
-     * @param coupon The Coupon object to be added
+     * @param coupon The CouponDTO object to be added
      * @throws CouponException if a coupon with the same title already exists for the company
      * @Override Overrides the addCoupon method from a parent class or interface
      */
@@ -71,8 +71,8 @@ public class CompanyServicesImpl implements CompanyServices {
 
         log.info("Entering addCoupon, company id: {} and title: {}", company.getId(), coupon.getTitle());
         if (company.getCoupons().size() != 0 && company.getCoupons().stream().anyMatch(coupon::equals)) {
-            log.error("Coupon already exists for company id: {} and title: {}", company.getId(), coupon.getTitle());
-            throw new CouponException("Coupon already exists");
+            log.error("CouponDTO already exists for company id: {} and title: {}", company.getId(), coupon.getTitle());
+            throw new CouponException("CouponDTO already exists");
         } else {
             couponRepository.save(coupon);
             company.getCoupons().add(coupon);
@@ -84,7 +84,7 @@ public class CompanyServicesImpl implements CompanyServices {
     /**
      * Updates an existing coupon in the system.
      *
-     * @param coupon The Coupon object with updated information
+     * @param coupon The CouponDTO object with updated information
      * @throws NoSuchElementException if no coupon exists with the given ID
      * @Override Overrides the updateCoupon method from a parent class or interface
      */
@@ -96,7 +96,7 @@ public class CompanyServicesImpl implements CompanyServices {
             log.debug("UpdateCoupon succeeded, coupon id {}",coupon.getId());
         }else{
             log.error("No such coupon to update, company id: {} and title: {}", coupon.getCompany().getId(),coupon.getTitle());
-            throw new NoSuchElementException("Coupon does not exists");
+            throw new NoSuchElementException("CouponDTO does not exists");
         }
     }
 
@@ -129,13 +129,19 @@ public class CompanyServicesImpl implements CompanyServices {
      * Retrieves all coupons associated with a specific company.
      *
      * @param companyId The ID of the company whose coupons are to be retrieved
-     * @return A List of Coupon objects associated with the specified company
+     * @return A List of CouponDTO objects associated with the specified company
      * @Override Overrides the getCompanyCoupons method from a parent class or interface
      */
     @Override
     public List<Coupon> getCompanyCoupons(int companyId){
         log.info("Entering getCompanyCoupons, using company id : {}",companyId);
         return couponRepository.findAllByCompanyId(companyId);
+    }
+
+    @Override
+    public Coupon getCouponById(int couponID){
+        log.info("Entering getCouponById coupon id: {}", couponID);
+        return couponRepository.findById(couponID).orElse(null);
     }
 
 //

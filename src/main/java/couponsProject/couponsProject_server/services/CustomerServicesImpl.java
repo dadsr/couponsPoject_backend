@@ -45,7 +45,7 @@ public class CustomerServicesImpl implements CustomerServices {
      * Retrieves a customer by their ID.
      *
      * @param customerId The ID of the customer to retrieve
-     * @return The Customer object if found, or null if no customer exists with the given ID
+     * @return The CustomerDTO object if found, or null if no customer exists with the given ID
      * @Override Overrides the getCustomer method from a parent class or interface
      */
     @Override
@@ -86,7 +86,7 @@ public class CustomerServicesImpl implements CustomerServices {
      * Retrieves all coupons purchased by a specific customer.
      *
      * @param customerId The ID of the customer whose coupons are to be retrieved
-     * @return A List of Coupon objects purchased by the specified customer
+     * @return A List of CouponDTO objects purchased by the specified customer
      * @throws CouponException if the customer doesn't exist
      * @Override Overrides the getCoupons method from a parent class or interface
      */
@@ -107,7 +107,7 @@ public class CustomerServicesImpl implements CustomerServices {
      *
      * @param customerId The ID of the customer whose coupons are to be retrieved
      * @param category The category of coupons to filter by
-     * @return A List of Coupon objects matching the specified category and purchased by the customer
+     * @return A List of CouponDTO objects matching the specified category and purchased by the customer
      *         Returns an empty list if the customer doesn't exist
      * @Override Overrides the getCoupons method from a parent class or interface
      */
@@ -129,7 +129,7 @@ public class CustomerServicesImpl implements CustomerServices {
      *
      * @param customerId The ID of the customer whose coupons are to be retrieved
      * @param maxPrice The maximum price of coupons to include
-     * @return A List of Coupon objects purchased by the customer and priced at or below the specified maximum
+     * @return A List of CouponDTO objects purchased by the customer and priced at or below the specified maximum
      *         Returns an empty list if the customer doesn't exist
      * @Override Overrides the getCoupons method from a parent class or interface
      */
@@ -152,7 +152,7 @@ public class CustomerServicesImpl implements CustomerServices {
      * or have an amount of zero, indicating they are not available for purchase.
      *
      * @param customerId the unique identifier of the customer for whom the coupons are being retrieved
-     * @return a list of {@code Coupon} objects that are available for purchase by the customer.
+     * @return a list of {@code CouponDTO} objects that are available for purchase by the customer.
      *         If the customer does not exist, returns an empty list.
      */
     @Override

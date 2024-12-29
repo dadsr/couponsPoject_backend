@@ -66,19 +66,26 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        log.info("entering shouldNotFilter request:{}",request);
         return request.getServletPath().equals("/login");
     }
 
     private DecodedJWT validateToken(String token) throws JWTVerificationException {
+        log.info("entering validateToken token:{}",token);
 
         Algorithm algorithm = Algorithm.HMAC256(jwtTokenUtil.getSecretKey());
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer("com.garbage.collectors") // Match issuer
                 .build();
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
         return verifier.verify(token); // Verify and decode the token
     }
 
     private boolean isAuthorized(String path,ClientTypeEnum role) {
+        log.info("entering isAuthorized path:{}  role:{}",path,role);
+
         switch (role){
             case ADMINISTRATOR:
                 return path.startsWith("/admin");

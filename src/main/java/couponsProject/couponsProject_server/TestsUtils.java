@@ -57,10 +57,10 @@ public  class TestsUtils {
     }
 
     /**
-     * Generates a list of random Company objects.
+     * Generates a list of random CompanyDTO objects.
      *
-     * @param num The number of Company objects to create
-     * @return A List of randomly generated Company objects
+     * @param num The number of CompanyDTO objects to create
+     * @return A List of randomly generated CompanyDTO objects
      * @throws IllegalArgumentException if num is less than or equal to 0
      */
     public static List<Company> createCompanies(int num) {
@@ -72,10 +72,10 @@ public  class TestsUtils {
     }
 
     /**
-     * Generates a list of random Customer objects.
+     * Generates a list of random CustomerDTO objects.
      *
-     * @param num The number of Customer objects to create
-     * @return A List of randomly generated Customer objects
+     * @param num The number of CustomerDTO objects to create
+     * @return A List of randomly generated CustomerDTO objects
      * @throws IllegalArgumentException if num is less than or equal to 0
      */
     public static List<Customer> createCustomers(int num) {
@@ -88,12 +88,12 @@ public  class TestsUtils {
     }
 
     /**
-     * Generates a list of random Coupon objects associated with a given Company.
+     * Generates a list of random CouponDTO objects associated with a given CompanyDTO.
      * This method does not update the company for the created coupons in the database.
      *
-     * @param company The Company object to associate with the created coupons
-     * @param num The number of Coupon objects to create
-     * @return A List of randomly generated Coupon objects
+     * @param company The CompanyDTO object to associate with the created coupons
+     * @param num The number of CouponDTO objects to create
+     * @return A List of randomly generated CouponDTO objects
      */
     public static List<Coupon> createCoupons(Company company ,int num) {
         return createEntities(num,() -> Coupon.builder()

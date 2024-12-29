@@ -31,6 +31,7 @@ public class LoginController {
         log.info("Attempting to log in using email:{} and password:{} and role:{}",email, password,role);
 
 
+
         switch (role){
             case "ADMINISTRATOR": {
                 AdminServices services = (AdminServices) loginManager.login(email, password, ClientTypeEnum.ADMINISTRATOR);

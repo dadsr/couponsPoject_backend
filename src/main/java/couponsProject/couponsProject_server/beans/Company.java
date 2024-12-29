@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a Company entity in the system.
+ * Represents a CompanyDTO entity in the system.
  * <p>
  * Annotations:
  * - @NoArgsConstructor: Generates a no-argument constructor.
@@ -21,13 +21,14 @@ import java.util.List;
  * Fields:
  * - id: Unique identifier (primary key, auto-generated).
  * - name: Name of the company (setter access restricted).
- * - email: Company's email address.
- * - password: Company's account password.
+ * - email: CompanyDTO's email address.
+ * - password: CompanyDTO's account password.
  * - childEntities: One-to-many relationship with associated entities.
  *   Fetches eagerly, cascades all operations, and removes orphaned entities.
  */
 @Slf4j
 @NoArgsConstructor
+
 @Getter
 @Setter
 @Entity
@@ -38,7 +39,6 @@ public class  Company {
     @Column(name = "id", nullable = false)
     @Setter(AccessLevel.NONE)
     private int id;
-    @Setter(AccessLevel.NONE)
     private String name;
     private String email;
     private String password;
@@ -77,12 +77,12 @@ public class  Company {
     /**
      * @Builder Enables builder pattern for flexible object creation
      * <p>
-     * Factory method for creating Company instances.
-     * @param name Company name
-     * @param email Company email
+     * Factory method for creating CompanyDTO instances.
+     * @param name CompanyDTO name
+     * @param email CompanyDTO email
      * @param password Account password
      * @param coupons List of associated coupons
-     * @return A new Company instance
+     * @return A new CompanyDTO instance
      */
     @Builder
     public static Company createInstance(String name, String email, String password, List<Coupon> coupons) {

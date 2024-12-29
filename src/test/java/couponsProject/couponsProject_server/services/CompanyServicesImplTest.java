@@ -64,7 +64,7 @@ class CompanyServicesImplTest {
         Assertions.assertThatThrownBy(() -> companyServices.addCoupon(coupon))
                 .as("test if adding exist coupon does throw exception")
                 .isInstanceOf(CouponException.class)
-                .hasMessageContaining("Coupon already exists");
+                .hasMessageContaining("CouponDTO already exists");
 
     }
     @Test
@@ -93,7 +93,7 @@ class CompanyServicesImplTest {
         Assertions.assertThatThrownBy(() -> companyServices.updateCoupon(coupon2))
                 .as("Test if updating a non-exists coupon throws NoSuchElementException")
                 .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("Coupon does not exists");
+                .hasMessageContaining("CouponDTO does not exists");
     }
 
     @Test

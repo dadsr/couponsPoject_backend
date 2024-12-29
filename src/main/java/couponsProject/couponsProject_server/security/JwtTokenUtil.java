@@ -5,18 +5,20 @@ import com.auth0.jwt.algorithms.Algorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
-@Component
+@Service
 public class JwtTokenUtil {
     @Value("${jwt.token.validity}")
     private int validitySeconds;
     private String secretKey;
-    private Map<String, LocalDateTime> activeTokens = new HashMap<>();
+    private final Map<String, LocalDateTime> activeTokens = new ConcurrentHashMap<>();//singleton and thread safe
 
     public JwtTokenUtil() {
         if (this.secretKey == null || this.secretKey.isEmpty()) {
@@ -53,26 +55,34 @@ public class JwtTokenUtil {
     }
 
     public boolean addToken(String token) {
+
         log.info("entering addToken token:{}", token);
-            return (activeTokens.put(token,LocalDateTime.now())==null);
+        boolean isNew = (activeTokens.put(token,LocalDateTime.now())==null);
+        log.info("Token added. Current activeTokens: {}",activeTokens);
+        return isNew;
     }
 
     public void updateLastActivity(String token) {
-        log.info("entering updateLastActivity");
+        log.info("entering updateLastActivity token: {}", token);
         if (activeTokens.containsKey(token)) {
             activeTokens.put(token, LocalDateTime.now());
         } else {
             System.out.println("Token not found in active tokens.");
         }
+        log.debug("Token updated. Current activeTokens: {}",activeTokens);
+
     }
 
     public void removeToken(String token) {
-        log.info("entering removeToken");
+        log.info("entering removeToken token: {}", token);
         activeTokens.remove(token);
+        log.info("Token removed. Current activeTokens: {}",activeTokens);
     }
 
     public boolean checkToken(String token) {
-        log.info("entering checkToken");
+        log.info("entering checkToken token: {}", token);
+        log.info("Current activeTokens: {}",activeTokens);
+        LocalDateTime tokenDate  = activeTokens.get(token);
         if (activeTokens.get(token).plusSeconds(validitySeconds).isAfter(LocalDateTime.now())) {
             updateLastActivity(token);
             return true;

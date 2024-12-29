@@ -10,7 +10,7 @@ import java.util.List;
 
 
 /**
- * Represents a Customer entity in the system.
+ * Represents a CustomerDTO entity in the system.
  *
  * @NoArgsConstructor Generates a no-argument constructor
  * @Getter/@Setter Generate getter and setter methods for fields
@@ -19,13 +19,13 @@ import java.util.List;
  * <p>
  * Fields:
  * - id: Unique identifier (auto-generated, immutable)
- * - firstName: Customer's first name
- * - lastName: Customer's last name
- * - email: Customer's email address
- * - password: Customer's account password
+ * - firstName: CustomerDTO's first name
+ * - lastName: CustomerDTO's last name
+ * - email: CustomerDTO's email address
+ * - password: CustomerDTO's account password
  * - coupons: List of coupons purchased by the customer
  * <p>
- * The coupons field represents a Many-to-Many relationship with Coupon entities:
+ * The coupons field represents a Many-to-Many relationship with CouponDTO entities:
  * @ManyToMany(fetch = FetchType.EAGER) Specifies eager loading of coupons
  * @JoinTable Defines the join table for the Many-to-Many relationship
  *   - name: "customers_vs_coupons"
@@ -83,13 +83,13 @@ public class Customer {
     /**
      * @Builder Enables builder pattern for flexible object creation
      * <p>
-     * Factory method for creating Customer instances.
-     * @param firstName Customer's first name
-     * @param lastName Customer's last name
-     * @param email Customer's email address
-     * @param password Customer's account password
+     * Factory method for creating CustomerDTO instances.
+     * @param firstName CustomerDTO's first name
+     * @param lastName CustomerDTO's last name
+     * @param email CustomerDTO's email address
+     * @param password CustomerDTO's account password
      * @param coupons List of coupons associated with the customer (can be null or empty)
-     * @return A new Customer instance
+     * @return A new CustomerDTO instance
      */
     @Builder
     public static Customer createInstance(String firstName, String lastName, String email, String password, List<Coupon> coupons) {

@@ -11,27 +11,27 @@ import java.sql.Date;
 import java.util.List;
 
 /**
- * Repository interface for Coupon entity operations.
+ * Repository interface for CouponDTO entity operations.
  * Extends JpaRepository for basic CRUD operations.
  */
 public interface CouponRepository extends JpaRepository<Coupon, Integer> {
-    //@Query("delete from Coupon c where c.company.id = ?1")
+    //@Query("delete from CouponDTO c where c.company.id = ?1")
     void deleteCouponByCompanyId(int companyID);
 
-    //@Query("select (count(c) > 0) from Coupon c where c.company.id = ?1 and c.title = ?2")
+    //@Query("select (count(c) > 0) from CouponDTO c where c.company.id = ?1 and c.title = ?2")
     boolean existsByCompanyIdAndTitle(int id, String title);
 
-    //@Query("delete from Coupon c where c.id = ?1")
+    //@Query("delete from CouponDTO c where c.id = ?1")
     void deleteCouponById(int couponID);
 
-    //@Query("select c from Coupon c where c.company.id = ?1")
+    //@Query("select c from CouponDTO c where c.company.id = ?1")
     List<Coupon> findAllByCompanyId(int companyID);
 
-    //@Query("select c from Coupon c where c.company.id = ?1 and c.category = ?2")
+    //@Query("select c from CouponDTO c where c.company.id = ?1 and c.category = ?2")
     List<Coupon> findAllByCompanyIdAndCategory(int company_id, CategoryEnum category);
 
 
-    //@Query("select c from Coupon c where c.company.id = ?1 and c.price <= ?2")
+    //@Query("select c from CouponDTO c where c.company.id = ?1 and c.price <= ?2")
     List<Coupon> findAllByCompanyIdAndPriceIsLessThanEqual(int companyID, Double maxPrice);
 
     //JPA's method query derivation is limited when handling nested relationships such as ManyToMany.
@@ -46,7 +46,7 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
 
     void delete(@NonNull Coupon coupon);
 
-    //@Query("select c from Coupon c where c.endDate < ?1")
+    //@Query("select c from CouponDTO c where c.endDate < ?1")
     List<Coupon> findByEndDateBefore(Date date);
 
 
