@@ -57,7 +57,7 @@ public class LoginController {
         if(token == null)
             throw new AuthenticationException("Invalid role specified");
         else if (!jwtTokenUtil.addToken(token)) {
-            throw new AuthenticationException("user already logged in");
+            log.info("user already logged in");
         }
         return ResponseEntity.ok(token);    }
 

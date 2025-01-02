@@ -24,7 +24,7 @@ public class JwtTokenUtil {
         if (this.secretKey == null || this.secretKey.isEmpty()) {
             this.secretKey = generateSecretKey();
         }
-        log.info("entering JwtTokenUtil secretKey:{} ",this.secretKey );
+        log.info("entering JwtTokenUtil - secretKey:{} ",this.secretKey );
     }
 
     public String getSecretKey() {
@@ -32,7 +32,7 @@ public class JwtTokenUtil {
     }
 
     private static String generateSecretKey() {
-        log.info("entering generateSecretKey");
+        log.info("entering generateSecretKey - ");
 
         // Generate a strong random key
         SecureRandom secureRandom = new SecureRandom();
@@ -43,7 +43,7 @@ public class JwtTokenUtil {
     }
 
     public String createToken(int id, String name, String email,String role) {
-        log.info("entering createToken");
+        log.info("entering createToken - email:{} role:{}", email, role);
 
         return "Bearer " + JWT.create()
                 .withIssuer("com.garbage.collectors")
@@ -56,14 +56,15 @@ public class JwtTokenUtil {
 
     public boolean addToken(String token) {
 
-        log.info("entering addToken token:{}", token);
+        log.info("entering addToken - token:{}", token);
+        token = token.substring(7); // Remove "Bearer " prefix
         boolean isNew = (activeTokens.put(token,LocalDateTime.now())==null);
         log.info("Token added. Current activeTokens: {}",activeTokens);
         return isNew;
     }
 
     public void updateLastActivity(String token) {
-        log.info("entering updateLastActivity token: {}", token);
+        log.info("entering updateLastActivity - token: {}", token);
         if (activeTokens.containsKey(token)) {
             activeTokens.put(token, LocalDateTime.now());
         } else {
@@ -74,13 +75,13 @@ public class JwtTokenUtil {
     }
 
     public void removeToken(String token) {
-        log.info("entering removeToken token: {}", token);
+        log.info("entering removeToken - token: {}", token);
         activeTokens.remove(token);
         log.info("Token removed. Current activeTokens: {}",activeTokens);
     }
 
     public boolean checkToken(String token) {
-        log.info("entering checkToken token: {}", token);
+        log.info("entering checkToken - token: {}", token);
         log.info("Current activeTokens: {}",activeTokens);
         LocalDateTime tokenDate  = activeTokens.get(token);
         if (activeTokens.get(token).plusSeconds(validitySeconds).isAfter(LocalDateTime.now())) {

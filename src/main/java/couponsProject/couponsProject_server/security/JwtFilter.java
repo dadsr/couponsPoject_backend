@@ -29,13 +29,12 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        log.info("entering doFilterInternal request:{} and response:{} and filterChain:{}",request,response,filterChain );
+        log.info("entering doFilterInternal - request:{} and response:{} and filterChain:{}",request,response,filterChain );
 
         String authorizationHeader = request.getHeader("Authorization");
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-//String token = authorizationHeader.substring(7); // Remove "Bearer " prefix
-            String token = authorizationHeader;
+            String token = authorizationHeader.substring(7); // Remove "Bearer " prefix
             try {
                 if(!jwtTokenUtil.checkToken(token)) {
                     throw new AuthenticationException("Invalid token");
@@ -60,31 +59,28 @@ public class JwtFilter extends OncePerRequestFilter {
             }
         }
 
-        log.info("doFilterInternal sends request:{} and response:{}",request,response );
+        log.info("doFilterInternal - sends request:{} and response:{}",request,response );
         filterChain.doFilter(request, response);
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        log.info("entering shouldNotFilter request:{}",request);
+        log.info("entering shouldNotFilter - request:{}",request);
         return request.getServletPath().equals("/login");
     }
 
     private DecodedJWT validateToken(String token) throws JWTVerificationException {
-        log.info("entering validateToken token:{}",token);
+        log.info("entering validateToken - token:{}",token);
 
         Algorithm algorithm = Algorithm.HMAC256(jwtTokenUtil.getSecretKey());
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer("com.garbage.collectors") // Match issuer
                 .build();
-        if (token.startsWith("Bearer ")) {
-            token = token.substring(7);
-        }
         return verifier.verify(token); // Verify and decode the token
     }
 
     private boolean isAuthorized(String path,ClientTypeEnum role) {
-        log.info("entering isAuthorized path:{}  role:{}",path,role);
+        log.info("entering isAuthorized - path:{}  role:{}",path,role);
 
         switch (role){
             case ADMINISTRATOR:
