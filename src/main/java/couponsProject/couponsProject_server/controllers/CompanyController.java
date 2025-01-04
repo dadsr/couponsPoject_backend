@@ -63,6 +63,7 @@ public class CompanyController {
                 .amount(couponDTO.getAmount())
                 .startDate(couponDTO.getStartDate())
                 .endDate(couponDTO.getEndDate())
+                .image(couponDTO.getImage())
                 .build();
         companyService.addCoupon(coupon);
         return ResponseEntity.ok("coupon added");
