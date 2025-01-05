@@ -95,6 +95,19 @@ public class AdminController {
         return ResponseEntity.ok("Company added");
     }
 
+    @PostMapping("/customer/add")
+    public ResponseEntity<String> addCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
+        log.info("entering @PutMapping addCustomer company id:{}", customerDTO.getId());
+        Customer customer = Customer.builder()
+                .firstName(customerDTO.getFirstName())
+                .lastName(customerDTO.getLastName())
+                .email(customerDTO.getEmail())
+                .password(customerDTO.getPassword())
+                .build();
+        adminServices.addCustomer(customer);
+        return ResponseEntity.ok("customer added");
+    }
+
 
 }
 

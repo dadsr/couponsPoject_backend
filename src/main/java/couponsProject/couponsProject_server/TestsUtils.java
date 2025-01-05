@@ -6,6 +6,7 @@ import couponsProject.couponsProject_server.beans.Coupon;
 import couponsProject.couponsProject_server.beans.Customer;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -14,7 +15,6 @@ import java.util.function.Supplier;
 
 public  class TestsUtils {
     static Random rand = new Random();
-
     /**
      * Returns the current date as a java.sql.Date object.
      * This method is typically used to set the start date for entities like coupons.
@@ -96,6 +96,7 @@ public  class TestsUtils {
      * @return A List of randomly generated CouponDTO objects
      */
     public static List<Coupon> createCoupons(Company company ,int num) {
+
         return createEntities(num,() -> Coupon.builder()
                 .company(company)
                 .category(CategoryEnum.fromId(rand.nextInt(CategoryEnum.values().length)))
@@ -104,7 +105,7 @@ public  class TestsUtils {
                 .startDate(getStartDate())
                 .endDate(getRandomDateFromNow(30))
                 .amount(rand.nextInt(1, 30))
-                .price(rand.nextDouble(100.00))
+                .price(Math.round(rand.nextDouble(100.00)))
                 .image(null)
                 .build());
     }
